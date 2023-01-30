@@ -1,0 +1,177 @@
+    2  mkdir pki
+    3  cd pki/
+    4  mkdir private
+    5  cd private/
+    6  cd ..
+    7  rm -rf private/
+    8  ls
+    9  mkdir  rootca
+   10  cd rootca/
+   11  mkdir private
+   12  cd private/
+   13  openssl  genrsa  -aes256 -out root-ca.key 4096
+   14  ls
+   16  yum  install openssl-libs -y
+   17  cd /etc/pki/tls/
+   18  ls
+   19  cp openssl.cnf /root/pki/rootca/
+   20  cd /root/pki/rootca/
+   21  ls
+   22  vim openssl.cnf 
+   23  ls
+   24  [wd
+   25  pwd
+   26  mkdir newcerts
+   27  vim openssl.cnf 
+   28  lls
+   29  ls
+   30  pwd
+   31  mkdir certs
+   32  ls
+   33  touch index.txt
+   34  vim openssl.cnf 
+   35  ls
+   36  dir
+   37  echo $dir
+   38  echo $`dir`
+   39  ls
+   40  echo 01 > serial
+   41  cat serial 
+   42  openssl req -config openssl.cnf -key private/root-ca.key  -new -days 3650    -sha256 -x509 -extensions v3_ca -out certs/root-ca.crt
+   43  ls
+   44  openssl x509 -in certs/root-ca.crt -text
+   45  openssl x509 -in certs/root-ca.crt -text -noout
+   46  ls
+   47  pwd
+   48  ls ../
+   49  cd ..
+   50  ls
+   51  mkdir subca
+   52  cd subca/
+   53  mkdr private
+   54  mkdir private
+   55  ls
+   56  cd ..
+   57  ls
+   58  tree
+   59  ls
+   60  cd subca/private/
+   61  ls
+   62  openssl genrsa -aes256 -out subca.key 4096
+   63  ls
+   64  tree /root/pki/
+   65  cd ..
+   66  ls
+   67  cp /etc/pki/tls/openssl.cnf .
+   68  ls
+   69  vim openssl.cnf 
+   70  ;ls
+   71  ls
+   72  openssl req -new -key private/subca.key  -sha256 -out subca.csr
+   73  ls
+   74  openssl req -in subca.csr -test -noout
+   75  openssl x509 -in subca.csr -test -noout
+   76  history 
+   77  openssl x509 -in subca.csr -text -noout
+   88  openssl req -new -key private/subca.key  -sha256 -out subca.csr
+   89  openssl x509 -in subca.csr -text -noout
+   92  openssl req -in subca.csr -text --noout
+   93  vim /root/pki	/rootca/openssl.cnf 
+   94  cd /root/pki/rootca/
+   95  openssl ca -config openssl.cnf -extensions v3_intermediate_ca -in /root/pki/subca/subca.csr  -out  /root/pki/subca/subca.crt -days 3650 
+   96  pwd
+   97  ls
+   98  vim openssl.cnf 
+   99  ls
+  100  ls private/
+  101  vim openssl.cnf 
+  102  openssl ca -config openssl.cnf -extensions v3_intermediate_ca -in /root/pki/subca/subca.csr  -out  /root/pki/subca/subca.crt -days 3650 
+  103  vim openssl.cnf 
+  104  ls certs/
+  105  vim openssl.cnf 
+  106  openssl ca -config openssl.cnf -extensions v3_intermediate_ca -in /root/pki/subca/subca.csr  -out  /root/pki/subca/subca.crt -days 3650 
+  107  cat serial 
+  108  cd /root/pki/subca/
+  109  rm -f subca.csr 
+  110  openssl req -new -key private/subca.key  -sha256 -out subca.csr
+  111  ls
+  112  cd /root/pki/rootca/
+  113  openssl ca -config openssl.cnf -extensions v3_intermediate_ca -in /root/pki/subca/subca.csr  -out  /root/pki/subca/subca.crt -days 3650 
+  114  cd -
+  115  rm -f subca.csr 
+  116  openssl req -new -key private/subca.key  -sha256 -out subca.csr
+  117  cd -
+  118  openssl ca -config openssl.cnf -extensions v3_intermediate_ca -in /root/pki/subca/subca.csr  -out  /root/pki/subca/subca.crt -days 3650 
+  119  cd  - 
+  120  rm -f subca.csr 
+  121  openssl req -new -key private/subca.key  -sha256 -out subca.csr
+  122  cd - 
+  123  openssl ca -config openssl.cnf -extensions v3_intermediate_ca -in /root/pki/subca/subca.csr  -out  /root/pki/subca/subca.crt -days 3650 
+  124  cat index.txt
+  125  cat serial
+  126  ls
+  127  cd - 
+  128  ls
+  129  cd - 
+  130  ls newcerts/
+  131  ls
+  132  ls certs/
+  133  cd - 
+  134  openssl x509 -in subca.crt 
+  135  openssl x509 -in subca.crt  -text
+  136  ls
+  137  vim openssl.cnf 
+  138  yum  install httpd -y
+  139  systemctl enable httpd--now
+  140  systemctl enable httpd --now
+  141  vim /var/www/html/index.html
+  142  curl localhost
+  143  curl -X  POST  -d "u=jack&p=12" localhost 
+  144  cd - 
+  145  la
+  146  ls
+  147  cd ..
+  148  ls
+  149  mkdir server
+  150  cd server/
+  151  mkdir private
+  152  cd private/
+  153  openssl genrsa -out server.key 4096
+  154  ls
+  155  pwd
+  156  cd ..
+  157  ls
+  158  openssl req -key  private/server.key  -new -sha256 -out server.csr
+  159  openssl req -in server.csr -text
+  160  cd ../subca/
+  161  vim openssl.cnf 
+  162  ls
+  163  openssl ca -config openssl.cnf  -extension v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  164  openssl ca -config openssl.cnf  -extensions v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  165  ls private/
+  166  pwd
+  167  vim openssl.cnf 
+  168  openssl ca -config openssl.cnf  -extensions v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  169  ls
+  170  vim openssl.cnf 
+  171  ls
+  172  vim openssl.cnf 
+  173  openssl ca -config openssl.cnf  -extensions v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  174  vim openssl.cnf 
+  175  openssl ca -config openssl.cnf  -extensions v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  176  touch index.txt
+  177  openssl ca -config openssl.cnf  -extensions v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  178  echo 01 > serial
+  179  openssl ca -config openssl.cnf  -extensions v3_req -days 365 -in /root/pki/server/server.csr  -out /root/pki/server/server.crt 
+  180  cat serial
+  181  cat index.txt
+  182  ls
+  183  ls ../server/
+  184  cd ../server/
+  185  openssl x509 -in server.crt -text
+  186  cd ..
+  187  tree pki/
+  188  ifconfig enp0s3
+  189  openssl s_server -accept 443 -www  key /root/pki/server/private/server.key   -cert /root/pki/server/server.crt -CAfile /root/pki/subca/subca.crt 
+  190  openssl s_server -accept 443 -www  -key /root/pki/server/private/server.key                     -cert /root/pki/server/server.crt -CAfile /root/pki/subca/subca.crt 
+  191  history 

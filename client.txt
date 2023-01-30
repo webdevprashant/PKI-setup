@@ -1,0 +1,50 @@
+   96  curl localhost:443
+   97  curl -k localhost:443
+   98  curl https://localhost:443
+   99  cat /root/pki/rootca/certs/root-ca.crt  >> /etc/pki/tls/certs/ca-bundle.crt 
+  100  vim /etc/pki/tls/certs/ca-bundle.crt 
+  101  tail -10 /etc/pki/tls/certs/ca-bundle.crt 
+  102  tail -40 /etc/pki/tls/certs/ca-bundle.crt 
+  103  tail -90 /etc/pki/tls/certs/ca-bundle.crt 
+  104  curl https://localhost:443
+  105  vim /etc/hosts 
+  106* 
+  107  vim /etc/hosts 
+  108  curl https://localhost:443
+  109  vim /etc/hosts 
+  110  curl https://127.0.0.1:443
+  111  curl -k https://localhost:443
+  112  vim /etc/hosts 
+  113  curl  https://localhost:443
+  114  cat /etc/host
+  115  cat /etc/hosts 
+  116  curl  https://www.prashantplanet.com:443
+  117  yum  install mod_ssl -y
+  118  cd /etc/httpd/conf.d/
+  119  ls
+  120  vim ssl.conf 
+  121  setenforce 0
+  122  curl localhost
+  123  systemctl restart httpd
+  124  systemctl status httpd
+  125  systemctl restart httpd
+  126  netstat -tnlp
+  127  curl localhost
+  128  curl https://localhost:443
+  129  curl https://127.0.0.1:443
+  130  vim /etc/hosts 
+  131  curl https://127.0.0.1:443
+  132  curl https://www.prashantplanet.com:443
+  133  curl https://127.0.0.1:443
+  134  curl localhost
+  135  curl https://127.0.0.1:443
+  136  curl localhost
+  137  curl https://www.prashantplanet.com:443
+  138  ls
+  139  ls cp ssl.conf /root/pki/
+  140  cp ssl.conf /root/pki/
+  141  ls
+  142  cd 
+  143  ls
+  144  history 
+  145  history > client.txt
